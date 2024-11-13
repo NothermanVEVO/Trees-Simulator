@@ -47,6 +47,8 @@ public class SimuladorABB extends EngineFrame {
 
     @Override
     public void update( double delta ) {
+        
+        
     
         Vector2 mousePos = getMousePositionPoint();
         
@@ -81,14 +83,34 @@ public class SimuladorABB extends EngineFrame {
 
     @Override
     public void draw() {
+        //Text on Screen
+        
+        //setBackground(GOLD);
+        setFontSize(20);
+        drawText("1 - Inserir", new Vector2(5, 5), BLACK);
+        drawText("2 - Em nível", new  Vector2(5, 25), BLACK);
+        drawText("3 - Em pré-Ordem", new  Vector2(5, 45), BLACK);
+        drawText("4 - Em ordem", new  Vector2(5, 65), BLACK);
+        drawText("5 - Em pos-ordem", new  Vector2(5, 85), BLACK);
+        
+        //QUAL Q VC PREFERE, ESSE DE CIMA OU ESSE DE BAIXO??? (O DE BAIXO EU COPIEI DA VIC QUE COPIOU DOS MENINOS)
+        setFontSize(15);
+        drawText("1 - Inserir   | 2 - Remover      \n3  - Pré-Ordem | 4  - Em Ordem | 5 - Pós-Ordem | 6 - Em Nível", new Vector2(20, getScreenHeight() - 50), BLACK);
+        
+        
+        
+        
+        
         for ( ArvoreBinariaBusca.Node<Integer, String> no : nos ) {
-            desenharNo( no, espacamento, espacamento );
+            
+            desenharNo( no, espacamento , espacamento );
+            drawText(no.key.toString(), new Vector2((((espacamento * no.ranque + margemEsquerda) - 10) + 100), ((espacamento * no.nivel + margemCima) - 5) + 100) , BLACK);
         }
     }
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
-        fillCircle( espHorizontal * no.ranque + margemEsquerda, espVertical * no.nivel + margemCima, raio, no.cor );
-        drawCircle( espHorizontal * no.ranque + margemEsquerda, espVertical * no.nivel + margemCima, raio, BLACK );
+        fillCircle( (espHorizontal * no.ranque + margemEsquerda) + 100, (espVertical * no.nivel + margemCima) + 100, raio, no.cor );
+        drawCircle( (espHorizontal * no.ranque + margemEsquerda) + 100, (espVertical * no.nivel + margemCima) + 100, raio, BLACK );
     }
     
     public static void main( String[] args ) {
