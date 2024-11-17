@@ -4,6 +4,8 @@ import aesd.ds.interfaces.List;
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import projetoesdarvores.esd.ArvoreBinariaBusca;
@@ -30,6 +32,10 @@ public class SimuladorABB extends EngineFrame {
     public SimuladorABB() {
         super( 800, 600, "Simulador de Árvores Binárias de Busca", 60, true );
     }
+    
+    private void timeOut(){
+        System.out.println("projetoesdarvores.SimuladorABB.timeOut()");
+    }
 
     @Override
     public void create() {
@@ -55,6 +61,7 @@ public class SimuladorABB extends EngineFrame {
         cooldownCount -= delta;
         if(cooldownCount <= 0){
             //System.out.println("TIMEOUT");
+            timeOut();
             cooldownCount += cooldown;
         }
         
@@ -70,7 +77,7 @@ public class SimuladorABB extends EngineFrame {
                     espacamento * no.nivel + margemCima
                 );
 
-                if ( CollisionUtils.checkCollisionPointCircle( mousePos.addValue(-100), centro, raio ) ) {
+                if ( CollisionUtils.checkCollisionPointCircle( mousePos, centro, raio ) ) {
                     SwingUtilities.invokeLater( () -> {
                         int opcao = JOptionPane.showConfirmDialog( 
                                 this, 
@@ -92,10 +99,26 @@ public class SimuladorABB extends EngineFrame {
             String opcao = JOptionPane.showInputDialog(rootPane,
                     "Qual o valor do nó a ser inserido?");
             
-            if(opcao != null && opcao.matches("[0-9]+")){
+            if(opcao != null && opcao.matches("[+-]?[0-9]+")){
                 arvore.put(Integer.valueOf(opcao), "");
                 nos = arvore.coletarParaDesenho();
             }
+        }
+        
+        if(isKeyPressed(KEY_KP_2)){
+            
+        }
+        
+        if(isKeyPressed(KEY_KP_3)){
+            
+        }
+        
+        if(isKeyPressed(KEY_KP_4)){
+            
+        }
+        
+        if(isKeyPressed(KEY_KP_5)){
+            
         }
             
                            
@@ -141,7 +164,7 @@ public class SimuladorABB extends EngineFrame {
     }
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
-        fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );
+        fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, WHITE );
         drawCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, BLACK );
     }
     
