@@ -108,15 +108,15 @@ public class SimuladorABB extends EngineFrame {
         }
         
         if(isKeyPressed(KEY_KP_2)){
-            ordemParanormal = level(nos);
+            ordemParanormal = levelEmNivel(nos);
         }
         
         if(isKeyPressed(KEY_KP_3)){
-            
+            ordemParanormal = emOrdem(nos);
         }
         
         if(isKeyPressed(KEY_KP_4)){
-            
+            ordemParanormal = preOrdem(nos);
         }
         
         if(isKeyPressed(KEY_KP_5)){
@@ -164,7 +164,7 @@ public class SimuladorABB extends EngineFrame {
         
     }
     
-    private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> level(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
+    private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> levelEmNivel(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
         
         ArrayList<ArvoreBinariaBusca.Node<Integer, String>> level = new ArrayList<>();
         
@@ -187,6 +187,47 @@ public class SimuladorABB extends EngineFrame {
         
     }
     
+<<<<<<< HEAD
+    private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> emOrdem(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
+        
+        ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordem = new ArrayList<>();
+        
+       
+        
+     
+            for ( ArvoreBinariaBusca.Node<Integer, String> no : nos ) {
+                ordem.add(no);
+            }
+           
+        
+        
+        
+        return ordem;
+        
+    }
+    
+    private void preOrdemAuxiliar(ArvoreBinariaBusca.Node<Integer, String> no, ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordem) {
+    if (no == null) {
+        return; // Caso base: nó nulo.
+    }
+    ordem.add(no); // Visita o nó atual.
+    preOrdemAuxiliar(no.left, ordem); // Percorre a subárvore esquerda.
+    preOrdemAuxiliar(no.right, ordem); // Percorre a subárvore direita.
+}
+    
+    private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> preOrdem(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
+        
+        ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordem = new ArrayList<>();
+
+            preOrdemAuxiliar(nos.get((int)nos.getSize()/2), ordem); // Chama o auxiliar para preencher a lista.
+
+        return ordem;
+        
+    }
+    
+    
+    
+=======
     private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> getPostOrder(List<ArvoreBinariaBusca.Node<Integer, String>> nos) {
         ArrayList<ArvoreBinariaBusca.Node<Integer, String>> result = new ArrayList<>();
         postOrderTraversal(getRoot(nos), result);
@@ -214,6 +255,7 @@ public class SimuladorABB extends EngineFrame {
         }
         return null;
     }
+>>>>>>> 06f7384fa01250a3a08aba4c409f206756fd1839
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
         fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );
