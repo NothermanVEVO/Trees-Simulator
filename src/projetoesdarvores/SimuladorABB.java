@@ -32,9 +32,6 @@ public class SimuladorABB extends EngineFrame {
     private Color noColor = WHITE;
     private Color linhaColor = BLACK;
     
-    
-    
-    
     private static ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordemParanormal = new ArrayList<>();
     
     private ArvoreBinariaBusca.Node<Integer, String> lastAlteration = null;
@@ -123,7 +120,7 @@ public class SimuladorABB extends EngineFrame {
         }
         
         if(isKeyPressed(KEY_KP_5)){
-            
+            ordemParanormal = getPostOrder(nos);
         }
             
                            
@@ -135,7 +132,6 @@ public class SimuladorABB extends EngineFrame {
     public void draw() {
         //Text on Screen
         
-        //setBackground(GOLD);
         setFontSize(20);
         drawText("1 - Inserir", new Vector2(5, 5), BLACK);
         drawText("2 - Em nível", new  Vector2(5, 25), BLACK);
@@ -191,6 +187,33 @@ public class SimuladorABB extends EngineFrame {
         
     }
     
+    private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> getPostOrder(List<ArvoreBinariaBusca.Node<Integer, String>> nos) {
+        ArrayList<ArvoreBinariaBusca.Node<Integer, String>> result = new ArrayList<>();
+        postOrderTraversal(getRoot(nos), result);
+        return result;
+    }
+
+    private void postOrderTraversal(ArvoreBinariaBusca.Node<Integer, String> node, ArrayList<ArvoreBinariaBusca.Node<Integer, String>> result) {
+        if (node == null) {
+            return;
+        }
+        // Recursivamente percorre o filho esquerdo
+        postOrderTraversal(node.left, result);
+        // Recursivamente percorre o filho direito
+        postOrderTraversal(node.right, result);
+        // Adiciona o nó atual à lista
+        result.add(node);
+    }
+    
+    // Metodo para pegar a raiz
+    private ArvoreBinariaBusca.Node<Integer, String> getRoot(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
+        for ( ArvoreBinariaBusca.Node<Integer, String> no : nos ) {
+            if(no.nivel == 0){
+                return no;
+            }
+        }
+        return null;
+    }
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
         fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );
