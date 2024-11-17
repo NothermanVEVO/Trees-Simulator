@@ -34,6 +34,13 @@ public class SimuladorABB extends EngineFrame {
     @Override
     public void create() {
         arvore = new ArvoreBinariaBusca<>();
+        arvore.put( 5, "cinco" );
+        arvore.put( 2, "dois" );
+        arvore.put( 10, "dez" );
+        arvore.put( 15, "quinze" );
+        arvore.put( 12, "doze" );
+        arvore.put( 1, "um" );
+        arvore.put( 3, "três" );
         nos = arvore.coletarParaDesenho();
         margemCima = 100;
         margemEsquerda = 50;
