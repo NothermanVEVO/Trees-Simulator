@@ -47,7 +47,7 @@ public class SimuladorABB extends EngineFrame {
         
         cooldownCount -= delta;
         if(cooldownCount <= 0){
-            System.out.println("TIMEOUT");
+            //System.out.println("TIMEOUT");
             cooldownCount += cooldown;
         }
         
@@ -85,8 +85,10 @@ public class SimuladorABB extends EngineFrame {
             String opcao = JOptionPane.showInputDialog(rootPane,
                     "Qual o valor do nó a ser inserido?");
             
-            arvore.put(Integer.valueOf(opcao), "");
-            nos = arvore.coletarParaDesenho();
+            if(opcao != null && opcao.matches("[0-9]+")){
+                arvore.put(Integer.valueOf(opcao), "");
+                nos = arvore.coletarParaDesenho();
+            }
         }
             
                            
