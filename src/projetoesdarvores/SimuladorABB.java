@@ -34,13 +34,6 @@ public class SimuladorABB extends EngineFrame {
     @Override
     public void create() {
         arvore = new ArvoreBinariaBusca<>();
-        arvore.put( 5, "cinco" );
-        arvore.put( 2, "dois" );
-        arvore.put( 10, "dez" );
-        arvore.put( 15, "quinze" );
-        arvore.put( 12, "doze" );
-        arvore.put( 1, "um" );
-        arvore.put( 3, "três" );
         nos = arvore.coletarParaDesenho();
         margemCima = 100;
         margemEsquerda = 50;
@@ -70,7 +63,7 @@ public class SimuladorABB extends EngineFrame {
                     espacamento * no.nivel + margemCima
                 );
 
-                if ( CollisionUtils.checkCollisionPointCircle( mousePos, centro, raio ) ) {
+                if ( CollisionUtils.checkCollisionPointCircle( mousePos.addValue(-100), centro, raio ) ) {
                     SwingUtilities.invokeLater( () -> {
                         int opcao = JOptionPane.showConfirmDialog( 
                                 this, 
@@ -88,6 +81,17 @@ public class SimuladorABB extends EngineFrame {
             
         }
         
+        if(isKeyPressed(KEY_KP_1)){
+            String opcao = JOptionPane.showInputDialog(rootPane,
+                    "Qual o valor do nó a ser inserido?");
+            
+            arvore.put(Integer.valueOf(opcao), "");
+            nos = arvore.coletarParaDesenho();
+        }
+            
+                           
+        
+        
     }
 
     @Override
@@ -101,10 +105,6 @@ public class SimuladorABB extends EngineFrame {
         drawText("3 - Em pré-ordem", new  Vector2(5, 45), BLACK);
         drawText("4 - Em ordem", new  Vector2(5, 65), BLACK);
         drawText("5 - Em pós-ordem", new  Vector2(5, 85), BLACK);
-        
-        //QUAL Q VC PREFERE, ESSE DE CIMA OU ESSE DE BAIXO??? (O DE BAIXO EU COPIEI DA VIC QUE COPIOU DOS MENINOS)
-        setFontSize(15);
-        drawText("1 - Inserir   | 2 - Remover      \n3  - Pré-Ordem | 4  - Em Ordem | 5 - Pós-Ordem | 6 - Em Nível", new Vector2(20, getScreenHeight() - 50), BLACK);
         
         
         
