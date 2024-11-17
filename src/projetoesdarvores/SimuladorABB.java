@@ -4,6 +4,7 @@ import aesd.ds.interfaces.List;
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import projetoesdarvores.esd.ArvoreBinariaBusca;
@@ -27,6 +28,12 @@ public class SimuladorABB extends EngineFrame {
     private final double cooldown = 1.0;
     private double cooldownCount;
     
+    
+    
+    private static ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordemParanormal = new ArrayList<>();
+    
+    private ArvoreBinariaBusca.Node<Integer, String> lastAlteration = null;
+    
     public SimuladorABB() {
         super( 800, 600, "Simulador de Árvores Binárias de Busca", 60, true );
     }
@@ -42,6 +49,7 @@ public class SimuladorABB extends EngineFrame {
         arvore.put( 1, "um" );
         arvore.put( 3, "três" );
         nos = arvore.coletarParaDesenho();
+        // ordemParanormal = level(nos);
         margemCima = 100;
         margemEsquerda = 50;
         raio = 20;
@@ -54,10 +62,9 @@ public class SimuladorABB extends EngineFrame {
         
         cooldownCount -= delta;
         if(cooldownCount <= 0){
-            //System.out.println("TIMEOUT");
+            timeout();
             cooldownCount += cooldown;
         }
-        
     
         Vector2 mousePos = getMousePositionPoint();
         
@@ -70,7 +77,7 @@ public class SimuladorABB extends EngineFrame {
                     espacamento * no.nivel + margemCima
                 );
 
-                if ( CollisionUtils.checkCollisionPointCircle( mousePos.addValue(-100), centro, raio ) ) {
+                if ( CollisionUtils.checkCollisionPointCircle( mousePos, centro, raio ) ) {
                     SwingUtilities.invokeLater( () -> {
                         int opcao = JOptionPane.showConfirmDialog( 
                                 this, 
@@ -92,7 +99,7 @@ public class SimuladorABB extends EngineFrame {
             String opcao = JOptionPane.showInputDialog(rootPane,
                     "Qual o valor do nó a ser inserido?");
             
-            if(opcao != null && opcao.matches("[0-9]+")){
+            if(opcao != null && opcao.matches("[+-]?[0-9]+")){
                 arvore.put(Integer.valueOf(opcao), "");
                 nos = arvore.coletarParaDesenho();
             }
@@ -140,9 +147,49 @@ public class SimuladorABB extends EngineFrame {
         
     }
     
+    private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> level(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
+        
+        ArrayList<ArvoreBinariaBusca.Node<Integer, String>> level = new ArrayList<>();
+        
+        int currentLevel = 0;
+        boolean alteration = true;
+        
+        while(alteration){
+            alteration = false;
+            for ( ArvoreBinariaBusca.Node<Integer, String> no : nos ) {
+                if(no.nivel == currentLevel){
+                    level.add(no);
+                    alteration = true;
+                }
+            }
+            currentLevel++;
+        }
+        
+        for ( ArvoreBinariaBusca.Node<Integer, String> no : level ) {
+            System.out.println(no);
+        }
+        
+        
+        return level;
+        
+    }
+    
+    
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
         fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );
         drawCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, BLACK );
+    }
+    
+    private void timeout(){
+        if(lastAlteration != null){
+            lastAlteration.cor = GREEN;
+            lastAlteration = null;
+        }
+        if(!ordemParanormal.isEmpty()){
+            ordemParanormal.get(0).cor = BLUE;
+            lastAlteration = ordemParanormal.get(0);
+            ordemParanormal.remove(0);
+        }
     }
     
     public static void main( String[] args ) {
