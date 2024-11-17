@@ -4,6 +4,8 @@ import aesd.ds.interfaces.List;
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
+import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import projetoesdarvores.esd.ArvoreBinariaBusca;
@@ -24,8 +26,12 @@ public class SimuladorABB extends EngineFrame {
     private int raio;
     private int espacamento;
     
-    private final double cooldown = 1.0;
+    private final double cooldown = 0.5;
     private double cooldownCount;
+   
+    private Color noColor = WHITE;
+    private Color linhaColor = BLACK;
+    
     
     
     
@@ -35,10 +41,6 @@ public class SimuladorABB extends EngineFrame {
     
     public SimuladorABB() {
         super( 800, 600, "Simulador de Árvores Binárias de Busca", 60, true );
-    }
-    
-    private void timeOut(){
-        System.out.println("projetoesdarvores.SimuladorABB.timeOut()");
     }
 
     @Override
@@ -65,7 +67,7 @@ public class SimuladorABB extends EngineFrame {
         
         cooldownCount -= delta;
         if(cooldownCount <= 0){
-            //System.out.println("TIMEOUT");
+            timeout();
             cooldownCount += cooldown;
         }
     
@@ -109,7 +111,7 @@ public class SimuladorABB extends EngineFrame {
         }
         
         if(isKeyPressed(KEY_KP_2)){
-            
+            ordemParanormal = level(nos);
         }
         
         if(isKeyPressed(KEY_KP_3)){
@@ -153,14 +155,14 @@ public class SimuladorABB extends EngineFrame {
             if(no.left != null){
                 drawLine((espacamento * no.ranque + margemEsquerda), (espacamento * no.nivel + margemCima) + raio,
                     (espacamento * no.left.ranque + margemEsquerda), (espacamento * no.left.nivel + margemCima) - raio, 
-                    PINK);
+                    linhaColor);
             }
             
             // Desenhar linha do no pai para o filho da direita, se existir
             if(no.right != null){
                 drawLine((espacamento * no.ranque + margemEsquerda), (espacamento * no.nivel + margemCima) + raio,
                     (espacamento * no.right.ranque + margemEsquerda), (espacamento * no.right.nivel + margemCima) - raio, 
-                    PINK);
+                    linhaColor);
             }
         }
         
@@ -191,14 +193,16 @@ public class SimuladorABB extends EngineFrame {
     
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
-        fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, WHITE );
+        fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );
         drawCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, BLACK );
     }
     
     private void timeout(){
+       
         if(lastAlteration != null){
-            lastAlteration.cor = GREEN;
+            lastAlteration.cor = WHITE;
             lastAlteration = null;
+            
         }
         if(!ordemParanormal.isEmpty()){
             ordemParanormal.get(0).cor = BLUE;

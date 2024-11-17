@@ -285,7 +285,7 @@ public class ArvoreBinariaBusca<Key extends Comparable<Key>, Value> implements I
             emOrdemColeta( node.left, nos, nivel + 1 );
             node.nivel = nivel;
             node.ranque = nos.getSize();
-            node.cor = EngineFrame.GREEN;
+            node.cor = EngineFrame.WHITE;
             nos.add( node );
             emOrdemColeta( node.right, nos, nivel + 1 );
         }
