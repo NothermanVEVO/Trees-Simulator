@@ -184,10 +184,6 @@ public class SimuladorABB extends EngineFrame {
             currentLevel++;
         }
         
-        for ( ArvoreBinariaBusca.Node<Integer, String> no : level ) {
-            System.out.println(no);
-        }
-        
         
         return level;
         
