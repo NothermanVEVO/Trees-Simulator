@@ -24,6 +24,9 @@ public class SimuladorABB extends EngineFrame {
     private int raio;
     private int espacamento;
     
+    private final double cooldown = 1.0;
+    private double cooldownCount;
+    
     public SimuladorABB() {
         super( 800, 600, "Simulador de Árvores Binárias de Busca", 60, true );
     }
@@ -43,11 +46,17 @@ public class SimuladorABB extends EngineFrame {
         margemEsquerda = 50;
         raio = 20;
         espacamento = 50;
+        cooldownCount = cooldown;
     }
 
     @Override
     public void update( double delta ) {
         
+        cooldownCount -= delta;
+        if(cooldownCount <= 0){
+            System.out.println("TIMEOUT");
+            cooldownCount += cooldown;
+        }
         
     
         Vector2 mousePos = getMousePositionPoint();
@@ -89,9 +98,9 @@ public class SimuladorABB extends EngineFrame {
         setFontSize(20);
         drawText("1 - Inserir", new Vector2(5, 5), BLACK);
         drawText("2 - Em nível", new  Vector2(5, 25), BLACK);
-        drawText("3 - Em pré-Ordem", new  Vector2(5, 45), BLACK);
+        drawText("3 - Em pré-ordem", new  Vector2(5, 45), BLACK);
         drawText("4 - Em ordem", new  Vector2(5, 65), BLACK);
-        drawText("5 - Em pos-ordem", new  Vector2(5, 85), BLACK);
+        drawText("5 - Em pós-ordem", new  Vector2(5, 85), BLACK);
         
         //QUAL Q VC PREFERE, ESSE DE CIMA OU ESSE DE BAIXO??? (O DE BAIXO EU COPIEI DA VIC QUE COPIOU DOS MENINOS)
         setFontSize(15);
@@ -99,18 +108,32 @@ public class SimuladorABB extends EngineFrame {
         
         
         
-        
-        
         for ( ArvoreBinariaBusca.Node<Integer, String> no : nos ) {
             
+            // Desenhar no
             desenharNo( no, espacamento , espacamento );
-            drawText(no.key.toString(), new Vector2((((espacamento * no.ranque + margemEsquerda) - 10) + 100), ((espacamento * no.nivel + margemCima) - 5) + 100) , BLACK);
+            drawText(no.key.toString(), new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5)) , BLACK);
+        
+            // Desenhar linha do no pai para o filho da esquerda, se existir
+            if(no.left != null){
+                drawLine((espacamento * no.ranque + margemEsquerda), (espacamento * no.nivel + margemCima) + raio,
+                    (espacamento * no.left.ranque + margemEsquerda), (espacamento * no.left.nivel + margemCima) - raio, 
+                    PINK);
+            }
+            
+            // Desenhar linha do no pai para o filho da direita, se existir
+            if(no.right != null){
+                drawLine((espacamento * no.ranque + margemEsquerda), (espacamento * no.nivel + margemCima) + raio,
+                    (espacamento * no.right.ranque + margemEsquerda), (espacamento * no.right.nivel + margemCima) - raio, 
+                    PINK);
+            }
         }
+        
     }
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
-        fillCircle( (espHorizontal * no.ranque + margemEsquerda) + 100, (espVertical * no.nivel + margemCima) + 100, raio, no.cor );
-        drawCircle( (espHorizontal * no.ranque + margemEsquerda) + 100, (espVertical * no.nivel + margemCima) + 100, raio, BLACK );
+        fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );
+        drawCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, BLACK );
     }
     
     public static void main( String[] args ) {
