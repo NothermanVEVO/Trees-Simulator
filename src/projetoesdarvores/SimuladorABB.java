@@ -51,7 +51,6 @@ public class SimuladorABB extends EngineFrame {
         arvore.put( 1, "um" );
         arvore.put( 3, "três" );
         nos = arvore.coletarParaDesenho();
-        // ordemParanormal = level(nos);
         margemCima = 100;
         margemEsquerda = 50;
         raio = 20;
@@ -97,7 +96,7 @@ public class SimuladorABB extends EngineFrame {
             
         }
         
-        if(isKeyPressed(KEY_KP_1)){
+        if(isKeyPressed(KEY_KP_1) || isKeyPressed(KEY_ONE)){
             String opcao = JOptionPane.showInputDialog(rootPane,
                     "Qual o valor do nó a ser inserido?");
             
@@ -107,25 +106,21 @@ public class SimuladorABB extends EngineFrame {
             }
         }
         
-        if(isKeyPressed(KEY_KP_2)){
+        if(isKeyPressed(KEY_KP_2) || isKeyPressed(KEY_TWO)){
             ordemParanormal = levelEmNivel(nos);
         }
         
-        if(isKeyPressed(KEY_KP_3)){
+        if(isKeyPressed(KEY_KP_3) || isKeyPressed(KEY_THREE)){
             ordemParanormal = emOrdem(nos);
         }
         
-        if(isKeyPressed(KEY_KP_4)){
+        if(isKeyPressed(KEY_KP_4) || isKeyPressed(KEY_FOUR)){
             ordemParanormal = preOrdem(nos);
         }
         
-        if(isKeyPressed(KEY_KP_5)){
+        if(isKeyPressed(KEY_KP_5) || isKeyPressed(KEY_FIVE)){
             ordemParanormal = getPostOrder(nos);
         }
-            
-                           
-        
-        
     }
 
     @Override
@@ -147,6 +142,10 @@ public class SimuladorABB extends EngineFrame {
             desenharNo( no, espacamento , espacamento );
             drawText(no.key.toString(), new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5)) , BLACK);
         
+            if(no == getRoot(nos)){
+                drawText("Raiz", new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5) - 30) , PINK);
+            }
+            
             // Desenhar linha do no pai para o filho da esquerda, se existir
             if(no.left != null){
                 drawLine((espacamento * no.ranque + margemEsquerda), (espacamento * no.nivel + margemCima) + raio,
@@ -187,14 +186,21 @@ public class SimuladorABB extends EngineFrame {
         
     }
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
     private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> emOrdem(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
         
         ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordem = new ArrayList<>();
             for ( ArvoreBinariaBusca.Node<Integer, String> no : nos ) {
                 ordem.add(no);
             }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
         return ordem;
         
     }
@@ -220,7 +226,10 @@ public class SimuladorABB extends EngineFrame {
     
     
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
     private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> getPostOrder(List<ArvoreBinariaBusca.Node<Integer, String>> nos) {
         ArrayList<ArvoreBinariaBusca.Node<Integer, String>> result = new ArrayList<>();
         postOrderTraversal(getRoot(nos), result);
@@ -248,7 +257,10 @@ public class SimuladorABB extends EngineFrame {
         }
         return null;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
         fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );

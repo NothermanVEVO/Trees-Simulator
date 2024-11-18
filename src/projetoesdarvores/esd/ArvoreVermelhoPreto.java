@@ -4,6 +4,8 @@ import aesd.ds.implementations.linear.LinkedQueue;
 import aesd.ds.implementations.linear.ResizingArrayList;
 import aesd.ds.interfaces.List;
 import aesd.ds.interfaces.Queue;
+import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
+import java.awt.Color;
 import java.util.Iterator;
 
 /**
@@ -28,7 +30,9 @@ public class ArvoreVermelhoPreto<Key extends Comparable<Key>, Value> implements 
         public Value value;
         public Node<Key, Value> left;
         public Node<Key, Value> right;
-
+        public int nivel;
+        public int ranque;
+        public Color cor;
         public NodeColor color;
         public int size;
         
@@ -483,6 +487,23 @@ public class ArvoreVermelhoPreto<Key extends Comparable<Key>, Value> implements 
             
         }
         
+    }
+    
+    private void emOrdemColeta(ArvoreVermelhoPreto.Node<Key, Value> node, List<ArvoreVermelhoPreto.Node<Key, Value>> nos, int nivel) {
+        if (node != null) {
+            emOrdemColeta(node.left, nos, nivel + 1);
+            node.nivel = nivel;
+            node.ranque = nos.getSize();
+            node.cor = EngineFrame.WHITE;
+            nos.add(node);
+            emOrdemColeta(node.right, nos, nivel + 1);
+        }
+    }
+    
+    public List<ArvoreVermelhoPreto.Node<Key, Value>> coletarParaDesenho() {
+        List<ArvoreVermelhoPreto.Node<Key, Value>> nos = new ResizingArrayList<>();
+        emOrdemColeta(root, nos, 0);
+        return nos;
     }
     
 }
