@@ -111,11 +111,11 @@ public class SimuladorABB extends EngineFrame {
         }
         
         if(isKeyPressed(KEY_KP_3) || isKeyPressed(KEY_THREE)){
-            ordemParanormal = emOrdem(nos);
+            ordemParanormal = preOrdem(nos);
         }
         
         if(isKeyPressed(KEY_KP_4) || isKeyPressed(KEY_FOUR)){
-            ordemParanormal = preOrdem(nos);
+            ordemParanormal = emOrdem(nos);
         }
         
         if(isKeyPressed(KEY_KP_5) || isKeyPressed(KEY_FIVE)){
