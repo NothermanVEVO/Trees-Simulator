@@ -4,6 +4,8 @@ import aesd.ds.implementations.linear.LinkedQueue;
 import aesd.ds.implementations.linear.ResizingArrayList;
 import aesd.ds.interfaces.List;
 import aesd.ds.interfaces.Queue;
+import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
+import java.awt.Color;
 import java.util.Iterator;
 
 /**
@@ -26,6 +28,9 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
         
         public Key key;
         public Value value;
+        public int nivel;
+        public int ranque;
+        public Color cor;
         public Node<Key, Value> left;
         public Node<Key, Value> right;
         
@@ -262,6 +267,8 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
         return size;
     }
     
+    
+    
     private Node<Key, Value> balance( Node<Key, Value> node ) {
         
         if ( node == null ) {
@@ -291,7 +298,7 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
     /**
      * Retorna a altura de um nó ou 0 caso o nó seja nulo.
      */
-    private int height( Node<Key, Value> node ) {
+    public int height( Node<Key, Value> node ) {
         return node == null ? 0 : ( (Node<Key, Value>) node ).height;
     }
 
@@ -469,5 +476,23 @@ public class ArvoreAVL<Key extends Comparable<Key>, Value> implements Iterable<K
         }
         
     }
+    
+    public void emOrdemColeta(ArvoreAVL.Node<Key, Value> node, List<ArvoreAVL.Node<Key, Value>> nos, int nivel){
+        if (node != null) {
+            emOrdemColeta(node.left, nos, nivel + 1);
+            node.nivel = nivel;
+            node.ranque = nos.getSize();
+            node.cor = EngineFrame.WHITE;
+            nos.add(node);
+            emOrdemColeta(node.right, nos, nivel + 1);
+        }
+    }
+    
+    public List<ArvoreAVL.Node<Key,Value>> coletarParaDesenho(){
+        List<ArvoreAVL.Node<Key, Value>> nos = new ResizingArrayList<>();
+        emOrdemColeta(root, nos, 0);
+        return nos;
+    }
+    
 
 }

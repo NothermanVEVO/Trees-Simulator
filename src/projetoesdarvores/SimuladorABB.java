@@ -186,21 +186,13 @@ public class SimuladorABB extends EngineFrame {
         
     }
     
-<<<<<<< HEAD
-
-=======
->>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
     private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> emOrdem(List<ArvoreBinariaBusca.Node<Integer, String>> nos){
         
         ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordem = new ArrayList<>();
             for ( ArvoreBinariaBusca.Node<Integer, String> no : nos ) {
                 ordem.add(no);
             }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
         return ordem;
         
     }
@@ -226,10 +218,6 @@ public class SimuladorABB extends EngineFrame {
     
     
     
-<<<<<<< HEAD
-
-=======
->>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
     private ArrayList<ArvoreBinariaBusca.Node<Integer, String>> getPostOrder(List<ArvoreBinariaBusca.Node<Integer, String>> nos) {
         ArrayList<ArvoreBinariaBusca.Node<Integer, String>> result = new ArrayList<>();
         postOrderTraversal(getRoot(nos), result);
@@ -257,10 +245,6 @@ public class SimuladorABB extends EngineFrame {
         }
         return null;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> c7998ad2f4cccacd4a8c00ccb61af25adb3caabf
     
     private void desenharNo( ArvoreBinariaBusca.Node<Integer, String> no, int espHorizontal, int espVertical ) {
         fillCircle( (espHorizontal * no.ranque + margemEsquerda), (espVertical * no.nivel + margemCima), raio, no.cor );
