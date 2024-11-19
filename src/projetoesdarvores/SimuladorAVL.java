@@ -160,11 +160,11 @@ public class SimuladorAVL extends EngineFrame {
     @Override
     public void draw() {
          setFontSize(20);
-        drawText("1 - Inserir", new Vector2(5, 5), BLACK);
-        drawText("2 - Em nível", new  Vector2(5, 25), BLACK);
-        drawText("3 - Em pré-ordem", new  Vector2(5, 45), BLACK);
-        drawText("4 - Em ordem", new  Vector2(5, 65), BLACK);
-        drawText("5 - Em pós-ordem", new  Vector2(5, 85), BLACK);
+        drawText("1 - Inserir", new Vector2(5, 5 + 490), BLACK);
+        drawText("2 - Em nível", new  Vector2(5, 25 + 490), BLACK);
+        drawText("3 - Em pré-ordem", new  Vector2(5, 45 + 490), BLACK);
+        drawText("4 - Em ordem", new  Vector2(5, 65 + 490), BLACK);
+        drawText("5 - Em pós-ordem", new  Vector2(5, 85 + 490), BLACK);
         
         
         for (ArvoreAVL.Node<Integer, String> no : nos) {
