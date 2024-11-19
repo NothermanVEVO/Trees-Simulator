@@ -1,28 +1,14 @@
 package projetoesdarvores;
 
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.BLACK;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_FIVE;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_FOUR;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_1;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_2;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_3;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_4;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_5;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_ONE;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_THREE;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_TWO;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.MOUSE_BUTTON_LEFT;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
 import projetoesdarvores.esd.ArvoreAVL;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import projetoesdarvores.esd.ArvoreBinariaBusca;
 
 /**
  * Simulador de árvores AVL:
@@ -43,7 +29,7 @@ public class SimuladorAVL extends EngineFrame {
     private final double cooldown = 0.5;
     private double cooldownCount;
    
-    private Color noColor = WHITE;
+    // private Color noColor = WHITE;
     private Color linhaColor = BLACK;
     
     private static ArrayList<ArvoreAVL.Node<Integer, String>> ordemParanormal = new ArrayList<>();
@@ -151,7 +137,7 @@ public class SimuladorAVL extends EngineFrame {
         
         var fatorDeBalanceamento = arvore.height(no.left) - arvore.height(no.right);
 
-        drawText(Integer.toString(fatorDeBalanceamento),
+        drawText((fatorDeBalanceamento > 0 ? "+" : "") + Integer.toString(fatorDeBalanceamento),
                 (espHorizontal * no.ranque + margemEsquerda + raio) + 10,
                 (espVertical * no.nivel + margemCima - raio) + 15,
                 14, BLACK);
@@ -172,7 +158,7 @@ public class SimuladorAVL extends EngineFrame {
              drawText(no.key.toString(), new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5)) , BLACK);
         
             if(no == getRoot(nos)){
-                drawText("Raiz", new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5) - 30) , PINK);
+                drawText("Raiz", new Vector2((((espacamento * no.ranque + margemEsquerda) - 23)), ((espacamento * no.nivel + margemCima) - 5) - 30) , PINK);
             }
             
             // Desenhar linha do no pai para o filho da esquerda, se existir

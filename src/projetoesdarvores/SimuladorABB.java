@@ -29,7 +29,7 @@ public class SimuladorABB extends EngineFrame {
     private final double cooldown = 0.5;
     private double cooldownCount;
    
-    private Color noColor = WHITE;
+    // private Color noColor = WHITE;
     private Color linhaColor = BLACK;
     
     private static ArrayList<ArvoreBinariaBusca.Node<Integer, String>> ordemParanormal = new ArrayList<>();
@@ -143,7 +143,7 @@ public class SimuladorABB extends EngineFrame {
             drawText(no.key.toString(), new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5)) , BLACK);
         
             if(no == getRoot(nos)){
-                drawText("Raiz", new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5) - 30) , PINK);
+                drawText("Raiz", new Vector2((((espacamento * no.ranque + margemEsquerda) - 23)), ((espacamento * no.nivel + margemCima) - 5) - 30) , PINK);
             }
             
             // Desenhar linha do no pai para o filho da esquerda, se existir

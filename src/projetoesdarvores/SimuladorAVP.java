@@ -1,16 +1,6 @@
 package projetoesdarvores;
 
 import br.com.davidbuzatto.jsge.core.engine.EngineFrame;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_FIVE;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_FOUR;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_1;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_2;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_3;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_4;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_KP_5;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_THREE;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.KEY_TWO;
-import static br.com.davidbuzatto.jsge.core.engine.EngineFrame.MOUSE_BUTTON_LEFT;
 import aesd.ds.interfaces.List;
 import br.com.davidbuzatto.jsge.math.CollisionUtils;
 import br.com.davidbuzatto.jsge.math.Vector2;
@@ -42,7 +32,7 @@ public class SimuladorAVP extends EngineFrame {
     private final double cooldown = 0.5;
     private double cooldownCount;
    
-    private Color noColor = WHITE;
+    // private Color noColor = WHITE;
     private Color linhaColor = BLACK;
     
     private static ArrayList<ArvoreVermelhoPreto.Node<Integer, String>> ordemParanormal = new ArrayList<>();
@@ -155,7 +145,7 @@ public class SimuladorAVP extends EngineFrame {
             drawText(no.key.toString(), new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5)) , BLACK);
         
             if(no == getRoot(nos)){
-                drawText("Raiz", new Vector2((((espacamento * no.ranque + margemEsquerda) - 10)), ((espacamento * no.nivel + margemCima) - 5) - 30) , PINK);
+                drawText("Raiz", new Vector2((((espacamento * no.ranque + margemEsquerda) - 23)), ((espacamento * no.nivel + margemCima) - 5) - 30) , PINK);
             }
             
             // Desenhar linha do no pai para o filho da esquerda, se existir
